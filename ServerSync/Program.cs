@@ -6,11 +6,11 @@ class Program
 {
     static string address = "127.0.0.1";
     static int port = 8080;             
-
-    static void Main(string[] args)
-    {
+    
+    public static void Main(string[] args)
+    { 
         IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse(address), port);
-        IPEndPoint remoteEndPoint = null;
+        IPEndPoint? remoteEndPoint = null;
         UdpClient listener = new UdpClient(ipPoint);
 
         try
@@ -19,6 +19,7 @@ class Program
 
             while (true)
             {
+
                 byte[] data = listener.Receive(ref remoteEndPoint);
 
                 string msg = Encoding.Unicode.GetString(data);
@@ -37,7 +38,5 @@ class Program
         {
             listener.Close();
         }
-
-//listener.Close();
     }
 }

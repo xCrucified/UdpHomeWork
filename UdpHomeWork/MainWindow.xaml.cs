@@ -24,6 +24,7 @@ namespace UdpHomeWork
     {
         static string address = string.Empty;
         static int port = 0;
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -37,16 +38,16 @@ namespace UdpHomeWork
         }
         private void ClientSync()
         {
+            IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse(address), port);
+
+            EndPoint remoteIpPoint = new IPEndPoint(IPAddress.Any, 0);
+
+            Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             try
             {
-                IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse(address), port);
-
-                EndPoint remoteIpPoint = new IPEndPoint(IPAddress.Any, 0);
-
-                Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
                 string message = "";
-                while (message != "end")
+                while (message != messageTxtBox.Text)
                 {
                     message = messageTxtBox.Text;
                     byte[] data = Encoding.Unicode.GetBytes(message);
@@ -62,15 +63,19 @@ namespace UdpHomeWork
                         response += Encoding.Unicode.GetString(data, 0, bytes);
                     } while (socket.Available > 1);
 
-                    MessageBox.Show("server response: " + response);
+                    //MessageBox.Show("server response: " + response);
                 }
 
                 socket.Shutdown(SocketShutdown.Both);
-                socket.Close();
+                
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                socket.Close();
             }
         }
     }
