@@ -12,7 +12,11 @@ namespace AssistantDb.DatabaseContext
 {
     public class AssistantDb : DbContext
     {
-        
+        public AssistantDb()
+        {
+            this.Database.EnsureDeleted();
+            this.Database.EnsureCreated();
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);

@@ -1,6 +1,7 @@
 ﻿using System.Net.Sockets;
 using System.Net;
 using System.Text;
+using AssistantDb.DatabaseContext;
 
 class Program
 {
@@ -9,7 +10,7 @@ class Program
     
     public static void Main(string[] args)
     {
-
+        AssistantDb assistantDb
         IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse(address), port);
         IPEndPoint? remoteEndPoint = null;
         UdpClient listener = new UdpClient(ipPoint);
