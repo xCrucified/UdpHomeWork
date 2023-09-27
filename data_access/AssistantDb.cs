@@ -8,15 +8,11 @@ using data_access.Utilities;
 using data_access.Utilities.Seeders;
 using Microsoft.EntityFrameworkCore;
 
-namespace AssistantDb.DatabaseContext
+namespace AssistantDb
 {
     public class AssistantDb : DbContext
     {
-        public AssistantDb()
-        {
-            this.Database.EnsureDeleted();
-            this.Database.EnsureCreated();
-        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
