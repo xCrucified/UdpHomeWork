@@ -28,5 +28,6 @@ namespace AssistantDb.DatabaseContext
         }
         //Tables
         public DbSet<Phrase> Phrase { get; set; }
+        public DbSet<Question> Question { get; set; }
     }
 }
